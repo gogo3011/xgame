@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+}
+
+group 'org.georgi'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
+}
+dependencies {
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+}
