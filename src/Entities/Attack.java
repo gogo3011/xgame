@@ -1,14 +1,22 @@
 package Entities;
 
+import Utils.Exceptions.InvalidTargetException;
+import Utils.Exceptions.NotEnoughManaException;
+import Utils.Exceptions.TargetIsDeadException;
+
 public class Attack {
     private final GameCharacter init;
     private final GameCharacter target;
     private final Ability usedAbility;
 
-    public Attack(GameCharacter init, GameCharacter target, Ability usedAbility) {
+    public Attack(GameCharacter init, GameCharacter target, Ability usedAbility) throws InvalidTargetException, NotEnoughManaException {
+        if(!target.isAlive()){
+            throw new TargetIsDeadException(usedAbility, target);
+        }
         this.init = init;
         this.target = target;
         this.usedAbility = usedAbility;
+        this.init.useAbility(this.usedAbility);
     }
 
     public double calculatePhysicalDmg() {
@@ -39,5 +47,14 @@ public class Attack {
 
     public Ability getUsedAbility() {
         return usedAbility;
+    }
+
+    @Override
+    public String toString(){
+        GameCharacter init = getInit();
+        GameCharacter target = getTarget();
+        return init.toString() + " used "
+                + getUsedAbility().getName() + " on " + target.toString() + " for "
+                + calculateTotalDmg() + " dmg!\n";
     }
 }

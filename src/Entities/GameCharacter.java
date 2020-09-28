@@ -1,6 +1,7 @@
 package Entities;
 
 import Utils.CharacterStatus;
+import Utils.Exceptions.NotEnoughManaException;
 
 public class GameCharacter extends GameEntity {
     private CharacterStatus status;
@@ -19,13 +20,13 @@ public class GameCharacter extends GameEntity {
         this.abilities = abilities.clone();
     }
 
-    // if returns false, attack has killed the character
     public CharacterStatus receiveAttack(Attack attack) {
         currHealth -= attack.calculateTotalDmg();
         if(currHealth <= 0) {
             this.status = CharacterStatus.DEAD;
+            currHealth = 0;
         }
-        return this.status;
+        return getStatus();
     }
 
     public Stats getStats() {
@@ -40,12 +41,36 @@ public class GameCharacter extends GameEntity {
         return name;
     }
 
-    public boolean usedAbility(Ability ability) {
+    public Ability getAbility(int index) {
+        return abilities[index];
+    }
+
+    public double getCurrHealth() {
+        return currHealth;
+    }
+
+    public double getCurrMana() {
+        return currMana;
+    }
+
+    public boolean isAlive() {
+        return getStatus() == CharacterStatus.ALIVE;
+    }
+
+    public void useAbility(Ability ability) throws NotEnoughManaException {
         double manaCost = ability.getManaCost();
         if(currMana < manaCost){
-            return false;
+            throw new NotEnoughManaException(ability);
         }
         currMana -= manaCost;
-        return true;
+    }
+
+    @Override
+    public String toString() {
+        return getName() + "[" + getCurrHealth() + "]" + "(" + getCurrMana() + ")";
+    }
+
+    public String toString(boolean withStats) {
+        return toString() + "\n" + getStats().toString();
     }
 }

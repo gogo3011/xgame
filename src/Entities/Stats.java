@@ -13,7 +13,7 @@ public class Stats {
     private double resistance;
 
     public Stats(double maxHealth, double maxMana,
-                 double strength, double intelligence, double armor, double resistance){
+                 double strength, double intelligence, double armor, double resistance) {
         this.maxHealth = maxHealth;
         this.maxMana = maxMana;
         this.strength = strength;
@@ -44,5 +44,14 @@ public class Stats {
 
     public double getStrength() {
         return strength;
+    }
+
+    public String toString() {
+        return "| Max Health: " + getMaxHealth() + "\n" +
+                "| Max Mana: " + getMaxMana() + "\n" +
+                "| Strength: " + getStrength() + "\n" +
+                "| Intelligence: " + getIntelligence() + "\n" +
+                "| Armor: " + getIntelligence() + "\n" +
+                "| Resistance: " + getIntelligence() + "\n";
     }
 }

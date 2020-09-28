@@ -37,14 +37,25 @@ public class CharacterFactory {
         JSONArray jsonArray = (JSONArray)jsonObject.get("abilities");
         Ability[] abilities = new Ability[jsonArray.size()];
         for (int i = 0; i < jsonArray.size(); i++) {
-            abilities[i] = (Ability) jsonArray.get(i);
+            JSONObject object = (JSONObject) jsonArray.get(i);
+            abilities[i] = new Ability(
+                    (String) object.get("name"),
+                    (String) object.get("description"),
+                    ((Long)object.get("physicalMulti")).doubleValue(),
+                    ((Long)object.get("magicalMulti")).doubleValue(),
+                    ((Long)object.get("manaCost")).doubleValue()
+            );
         }
         return abilities;
     }
 
     private Stats createStats(JSONObject jsonObject) {
-        return new Stats((double)jsonObject.get("maxHealth"),
-                (double)jsonObject.get("maxMana"), (double)jsonObject.get("strength"), (double)jsonObject.get("intelligence"),
-                (double)jsonObject.get("armor"), (double)jsonObject.get("resistance"));
+        return new Stats(((Long)jsonObject.get("maxHealth")).doubleValue(),
+                ((Long)jsonObject.get("maxMana")).doubleValue(),
+                ((Long)jsonObject.get("strength")).doubleValue(),
+                ((Long)jsonObject.get("intelligence")).doubleValue(),
+                ((Long)jsonObject.get("armor")).doubleValue(),
+                ((Long)jsonObject.get("resistance")).doubleValue()
+        );
     }
 }
