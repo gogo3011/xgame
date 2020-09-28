@@ -1,6 +1,7 @@
 package Services;
 
 import Entities.Ability;
+import Entities.FriendlyCharacter;
 import Entities.GameCharacter;
 import Entities.Stats;
 import org.json.simple.JSONArray;

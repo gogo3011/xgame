@@ -1,7 +1,7 @@
 {
   "name": "Link",
   "maxHealth": 100,
-  "maxMana": 30,
+  "maxMana": 100,
   "strength": 4,
   "intelligence": 5,
   "armor": 2,
@@ -9,10 +9,17 @@
   "abilities": [
     {
       "name": "Fireball",
-      "description": "Casts targeted fireball",
+      "description": "Casts a targeted fireball",
       "physicalMulti": 0,
       "magicalMulti": 5,
       "manaCost": 10
+    },
+    {
+      "name": "Firebullet",
+      "description": "Casts a targeted bullet",
+      "physicalMulti": 0,
+      "magicalMulti": 10,
+      "manaCost": 20
     }
   ]
 }

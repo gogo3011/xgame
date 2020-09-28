@@ -3,51 +3,57 @@ package Services;
 import Entities.Ability;
 import Entities.Attack;
 import Entities.GameCharacter;
-import Utils.CharacterStatus;
-import Utils.Exceptions.InvalidTargetException;
-import Utils.Exceptions.NotEnoughManaException;
+import Utils.Exceptions.CantCastAbilityException;
 
 import java.util.ArrayList;
 
-public class BattleService {
-    private static ArrayList<Attack> usedAttacks = new ArrayList<Attack>();
-    private static PrintingService printingService = new PrintingService();
+public class BattleService{
+    private final static ArrayList<Attack> usedAttacks = new ArrayList<>();
+    private final PrintingService printingService;
+    private GameplayService initPlayer;
+    private GameplayService targetPlayer;
 
-    public BattleService() {
+    public BattleService(PrintingService printingService, GameplayService initPlayer, GameplayService targetPlayer) {
+        this.printingService = printingService;
+        this.initPlayer = initPlayer;
+        this.targetPlayer = targetPlayer;
+     }
+
+    public void initiateBattle(GameCharacter init, GameCharacter target){
+        preBattleReport(init, target);
+        while (target.isAlive() && init.isAlive()){
+            Ability abilityI = this.initPlayer.chooseAbility(init);
+            attack(init, abilityI, target);
+            if(target.isAlive()) {
+                Ability abilityT = this.targetPlayer.chooseAbility(target);
+                attack(target, abilityT, init);
+            }
+        }
     }
 
     public void attack(GameCharacter init, Ability ability, GameCharacter target) {
         try {
             Attack currAttack = new Attack(init, target, ability);
-            target.receiveAttack(currAttack);
             battleReport(currAttack);
             addUsedAttack(currAttack);
-        } catch (NotEnoughManaException ex) {
-            printingService.print(ex.getMessage());
-        } catch (InvalidTargetException ex) {
+        } catch (CantCastAbilityException ex) {
             printingService.print(ex.getMessage());
         }
     }
 
+    private void preBattleReport(GameCharacter init, GameCharacter target) {
+        printingService.print(init.toString(true) + target.toString(true));
+    }
+
     private void battleReport(Attack attack) {
-        GameCharacter init = attack.getInit();
-        GameCharacter target = attack.getTarget();
-        // if target is still alive
-        if (target.getStatus() == CharacterStatus.ALIVE) {
-            printingService.print(attack);
-        } else {
-            //target is dead
-            printingService.print(init.getName() + " has slain " + target.getName() + "!\n");
-        }
+        printingService.print(attack);
+    }
+
+    private void postBattleReport() {
+        usedAttacks.forEach(printingService::print);
     }
 
     private void addUsedAttack(Attack attack) {
         usedAttacks.add(attack);
-    }
-
-    private void postBattleReport(){
-        usedAttacks.forEach((el) -> {
-
-        });
     }
 }

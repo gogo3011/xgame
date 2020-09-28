@@ -9,10 +9,17 @@
   "abilities": [
     {
       "name": "Fireball",
-      "description": "Casts targeted fireball",
+      "description": "Casts a targeted fireball",
       "physicalMulti": 0,
       "magicalMulti": 5,
       "manaCost": 10
+    },
+    {
+      "name": "Firebullet",
+      "description": "Casts a targeted bullet",
+      "physicalMulti": 0,
+      "magicalMulti": 10,
+      "manaCost": 20
     }
   ]
 }

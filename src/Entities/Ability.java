@@ -1,6 +1,8 @@
 package Entities;
 
-public class Ability extends GameEntity {
+import Services.ColorInterface;
+
+public class Ability extends GameEntity implements ColorInterface {
     private String name;
     private double physicalMulti;
     private double magicalMulti;
@@ -67,6 +69,7 @@ public class Ability extends GameEntity {
 
     @Override
     public String toString() {
-        return getName() + "(" + getManaCost() + ")";
+        return C_PURPLE + getName() + C_END
+                + C_CYAN +"(" + getManaCost() + ")" + C_END;
     }
 }

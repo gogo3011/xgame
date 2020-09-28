@@ -1,9 +1,10 @@
 package Entities;
 
+import Services.ColorInterface;
 import Utils.CharacterStatus;
 import Utils.Exceptions.NotEnoughManaException;
 
-public class GameCharacter extends GameEntity {
+public class GameCharacter extends GameEntity implements ColorInterface {
     private CharacterStatus status;
     private String name;
     private double currHealth;
@@ -39,6 +40,10 @@ public class GameCharacter extends GameEntity {
 
     public String getName() {
         return name;
+    }
+
+    public Ability[] getAbilities() {
+        return abilities;
     }
 
     public Ability getAbility(int index) {

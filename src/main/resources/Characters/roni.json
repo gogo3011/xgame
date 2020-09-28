@@ -13,6 +13,13 @@
       "physicalMulti": 0,
       "magicalMulti": 5,
       "manaCost": 10
-    }
+    },
+    {
+          "name": "Gun",
+          "description": "Casts targeted fireball",
+          "physicalMulti": 10,
+          "magicalMulti": 0,
+          "manaCost": 30
+        }
   ]
 }

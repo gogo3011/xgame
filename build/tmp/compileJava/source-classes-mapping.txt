@@ -1,28 +1,42 @@
-Entities/Ability.java
- Entities.Ability
-Utils/CharacterStatus.java
- Utils.CharacterStatus
 Services/PrintingService.java
  Services.PrintingService
-Entities/GameEntity.java
- Entities.GameEntity
 Entities/Stats.java
  Entities.Stats
-Services/CharacterFactory.java
- Services.CharacterFactory
-Utils/Exceptions/NotEnoughManaException.java
- Utils.Exceptions.NotEnoughManaException
-Utils/Exceptions/InvalidTargetException.java
- Utils.Exceptions.InvalidTargetException
+Entities/GameEntity.java
+ Entities.GameEntity
+Services/ColorInterface.java
+ Services.ColorInterface
+Utils/CharacterStatus.java
+ Utils.CharacterStatus
+Entities/EnemyCharacter.java
+ Entities.EnemyCharacter
+Entities/FriendlyCharacter.java
+ Entities.FriendlyCharacter
+Services/MenuService.java
+ Services.MenuService
 Entities/GameCharacter.java
  Entities.GameCharacter
 Entities/Attack.java
  Entities.Attack
-Utils/Exceptions/TargetIsDeadException.java
- Utils.Exceptions.TargetIsDeadException
-Utils/Exceptions/CantCastAbilityException.java
- Utils.Exceptions.CantCastAbilityException
-XGame.java
- XGame
 Services/BattleService.java
  Services.BattleService
+Services/AIService.java
+ Services.AIService
+Utils/Exceptions/CantCastAbilityException.java
+ Utils.Exceptions.CantCastAbilityException
+Services/GameplayService.java
+ Services.GameplayService
+Services/CharacterFactory.java
+ Services.CharacterFactory
+Utils/Exceptions/TargetIsDeadException.java
+ Utils.Exceptions.TargetIsDeadException
+Utils/Exceptions/NotEnoughManaException.java
+ Utils.Exceptions.NotEnoughManaException
+Utils/Exceptions/InvalidTargetException.java
+ Utils.Exceptions.InvalidTargetException
+Entities/Ability.java
+ Entities.Ability
+Services/PlayerService.java
+ Services.PlayerService
+XGame.java
+ XGame
