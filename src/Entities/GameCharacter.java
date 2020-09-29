@@ -29,13 +29,12 @@ public class GameCharacter extends GameEntity {
         this.abilities = src.abilities.clone();
     }
 
-    public CharacterStatus receiveAttack(Attack attack) {
+    public void receiveAttack(Attack attack) {
         currHealth -= attack.calculateTotalDmg();
         if (currHealth <= 0) {
             this.status = CharacterStatus.DEAD;
             currHealth = 0;
         }
-        return getStatus();
     }
 
     public Stats getStats() {
@@ -78,12 +77,19 @@ public class GameCharacter extends GameEntity {
         currMana -= manaCost;
     }
 
+    private String getResources(){
+        return "[" + getCurrHealth() + "]" + "(" + getCurrMana() + ")";
+    }
+
     @Override
     public String toString() {
         return getName() + "[" + getCurrHealth() + "]" + "(" + getCurrMana() + ")";
     }
 
     public String toString(boolean withStats) {
-        return toString() + "\n" + getStats().toString();
+        String result = toString();
+        if(withStats)
+            result += getStats().toString();
+        return result;
     }
 }

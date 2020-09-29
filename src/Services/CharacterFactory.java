@@ -3,15 +3,26 @@ package Services;
 import Entities.Ability;
 import Entities.GameCharacter;
 import Entities.Stats;
+import Utils.Helpers.FileHelper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class CharacterFactory {
     public CharacterFactory() {
+    }
+
+    public GameCharacter[] createCharFromResources(){
+        ArrayList<GameCharacter> characters = new ArrayList<>();
+        scanForJsonFiles("src/main/resources/Characters")
+                .forEach((el) -> characters.add(createCharFromJSON(el)));
+        GameCharacter[] arr = new GameCharacter[characters.size()];
+        arr = characters.toArray(arr);
+        return arr;
     }
 
     public GameCharacter createCharFromJSON(String path) {
@@ -28,6 +39,7 @@ public class CharacterFactory {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        assert jsonObject != null;
         Stats stats = createStats(jsonObject);
         Ability[] abilities = createAbilityArray(jsonObject);
         return new GameCharacter((String) jsonObject.get("name"), stats, abilities);
@@ -57,5 +69,10 @@ public class CharacterFactory {
                 ((Long) jsonObject.get("armor")).doubleValue(),
                 ((Long) jsonObject.get("resistance")).doubleValue()
         );
+    }
+
+    private ArrayList<String> scanForJsonFiles(String path) {
+        FileHelper fileHelper = new FileHelper();
+        return fileHelper.getFilesInFolder(path, "json");
     }
 }
