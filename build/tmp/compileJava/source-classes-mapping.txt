@@ -12,18 +12,18 @@ Utils/Exceptions/CantCastAbilityException.java
  Utils.Exceptions.CantCastAbilityException
 Utils/Exceptions/NotEnoughManaException.java
  Utils.Exceptions.NotEnoughManaException
-XGame.java
- XGame
-Entities/Ability.java
- Entities.Ability
 Utils/Exceptions/InvalidTargetException.java
  Utils.Exceptions.InvalidTargetException
+Entities/Ability.java
+ Entities.Ability
+Entities/EnemyCharacter.java
+ Entities.EnemyCharacter
 Utils/Exceptions/CantExecuteAttackException.java
  Utils.Exceptions.CantExecuteAttackException
 Entities/FriendlyCharacter.java
  Entities.FriendlyCharacter
-Services/MenuService.java
- Services.MenuService
+XGame.java
+ XGame
 Entities/GameCharacter.java
  Entities.GameCharacter
 Entities/Attack.java
@@ -36,11 +36,13 @@ Utils/Exceptions/AttackHasBeenExecutedException.java
  Utils.Exceptions.AttackHasBeenExecutedException
 Entities/Player.java
  Entities.Player
-Entities/HumanPlayer.java
- Entities.HumanPlayer
+Entities/GameSession.java
+ Entities.GameSession
 Entities/AIPlayer.java
  Entities.AIPlayer
 Utils/Exceptions/TargetIsDeadException.java
  Utils.Exceptions.TargetIsDeadException
-Entities/EnemyCharacter.java
- Entities.EnemyCharacter
+Entities/HumanPlayer.java
+ Entities.HumanPlayer
+Services/MenuService.java
+ Services.MenuService
