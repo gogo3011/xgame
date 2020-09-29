@@ -1,13 +1,14 @@
 package Entities;
 
-import Services.ColorInterface;
+import Utils.Helpers.ConsoleColorInterface;
 
-public class Ability extends GameEntity implements ColorInterface {
+public class Ability extends GameEntity implements ConsoleColorInterface {
     private String name;
     private double physicalMulti;
     private double magicalMulti;
     private double manaCost;
-    public Ability(){
+
+    public Ability() {
         setDescription("Empty ability (no effect)");
         setMagicalMulti(0);
         setPhysicalMulti(0);
@@ -34,7 +35,7 @@ public class Ability extends GameEntity implements ColorInterface {
     }
 
     public void setMagicalMulti(double magicalMulti) {
-        if(magicalMulti >= 0) {
+        if (magicalMulti >= 0) {
             this.magicalMulti = magicalMulti;
         }
     }
@@ -70,6 +71,6 @@ public class Ability extends GameEntity implements ColorInterface {
     @Override
     public String toString() {
         return C_PURPLE + getName() + C_END
-                + C_CYAN +"(" + getManaCost() + ")" + C_END;
+                + C_CYAN + "(" + getManaCost() + ")" + C_END;
     }
 }

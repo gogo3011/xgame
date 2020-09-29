@@ -1,10 +1,9 @@
 package Entities;
 
-import Services.ColorInterface;
 import Utils.CharacterStatus;
 import Utils.Exceptions.NotEnoughManaException;
 
-public class GameCharacter extends GameEntity implements ColorInterface {
+public class GameCharacter extends GameEntity {
     private CharacterStatus status;
     private String name;
     private double currHealth;
@@ -12,7 +11,7 @@ public class GameCharacter extends GameEntity implements ColorInterface {
     private Stats stats;
     private Ability[] abilities;
 
-    public GameCharacter(String name, Stats stats, Ability[] abilities){
+    public GameCharacter(String name, Stats stats, Ability[] abilities) {
         this.status = CharacterStatus.ALIVE;
         this.name = name;
         this.stats = stats;
@@ -23,7 +22,7 @@ public class GameCharacter extends GameEntity implements ColorInterface {
 
     public CharacterStatus receiveAttack(Attack attack) {
         currHealth -= attack.calculateTotalDmg();
-        if(currHealth <= 0) {
+        if (currHealth <= 0) {
             this.status = CharacterStatus.DEAD;
             currHealth = 0;
         }
@@ -64,7 +63,7 @@ public class GameCharacter extends GameEntity implements ColorInterface {
 
     public void useAbility(Ability ability) throws NotEnoughManaException {
         double manaCost = ability.getManaCost();
-        if(currMana < manaCost){
+        if (currMana < manaCost) {
             throw new NotEnoughManaException(ability);
         }
         currMana -= manaCost;

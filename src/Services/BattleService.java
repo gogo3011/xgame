@@ -3,28 +3,29 @@ package Services;
 import Entities.Ability;
 import Entities.Attack;
 import Entities.GameCharacter;
+import Entities.Player;
 import Utils.Exceptions.CantCastAbilityException;
 
 import java.util.ArrayList;
 
-public class BattleService{
+public class BattleService {
     private final static ArrayList<Attack> usedAttacks = new ArrayList<>();
     private final PrintingService printingService;
-    private GameplayService initPlayer;
-    private GameplayService targetPlayer;
+    private final Player initPlayer;
+    private final Player targetPlayer;
 
-    public BattleService(PrintingService printingService, GameplayService initPlayer, GameplayService targetPlayer) {
+    public BattleService(PrintingService printingService, Player initPlayer, Player targetPlayer) {
         this.printingService = printingService;
         this.initPlayer = initPlayer;
         this.targetPlayer = targetPlayer;
-     }
+    }
 
-    public void initiateBattle(GameCharacter init, GameCharacter target){
+    public void initiateBattle(GameCharacter init, GameCharacter target) {
         preBattleReport(init, target);
-        while (target.isAlive() && init.isAlive()){
+        while (target.isAlive() && init.isAlive()) {
             Ability abilityI = this.initPlayer.chooseAbility(init);
             attack(init, abilityI, target);
-            if(target.isAlive()) {
+            if (target.isAlive()) {
                 Ability abilityT = this.targetPlayer.chooseAbility(target);
                 attack(target, abilityT, init);
             }

@@ -1,7 +1,6 @@
 package Services;
 
 import Entities.Ability;
-import Entities.FriendlyCharacter;
 import Entities.GameCharacter;
 import Entities.Stats;
 import org.json.simple.JSONArray;
@@ -12,10 +11,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class CharacterFactory {
-    public CharacterFactory(){
+    public CharacterFactory() {
     }
 
-    public GameCharacter createCharFromJSON(String path){
+    public GameCharacter createCharFromJSON(String path) {
         String json = "";
         try {
             json = Files.readString(Paths.get(path));
@@ -35,28 +34,28 @@ public class CharacterFactory {
     }
 
     private Ability[] createAbilityArray(JSONObject jsonObject) {
-        JSONArray jsonArray = (JSONArray)jsonObject.get("abilities");
+        JSONArray jsonArray = (JSONArray) jsonObject.get("abilities");
         Ability[] abilities = new Ability[jsonArray.size()];
         for (int i = 0; i < jsonArray.size(); i++) {
             JSONObject object = (JSONObject) jsonArray.get(i);
             abilities[i] = new Ability(
                     (String) object.get("name"),
                     (String) object.get("description"),
-                    ((Long)object.get("physicalMulti")).doubleValue(),
-                    ((Long)object.get("magicalMulti")).doubleValue(),
-                    ((Long)object.get("manaCost")).doubleValue()
+                    ((Long) object.get("physicalMulti")).doubleValue(),
+                    ((Long) object.get("magicalMulti")).doubleValue(),
+                    ((Long) object.get("manaCost")).doubleValue()
             );
         }
         return abilities;
     }
 
     private Stats createStats(JSONObject jsonObject) {
-        return new Stats(((Long)jsonObject.get("maxHealth")).doubleValue(),
-                ((Long)jsonObject.get("maxMana")).doubleValue(),
-                ((Long)jsonObject.get("strength")).doubleValue(),
-                ((Long)jsonObject.get("intelligence")).doubleValue(),
-                ((Long)jsonObject.get("armor")).doubleValue(),
-                ((Long)jsonObject.get("resistance")).doubleValue()
+        return new Stats(((Long) jsonObject.get("maxHealth")).doubleValue(),
+                ((Long) jsonObject.get("maxMana")).doubleValue(),
+                ((Long) jsonObject.get("strength")).doubleValue(),
+                ((Long) jsonObject.get("intelligence")).doubleValue(),
+                ((Long) jsonObject.get("armor")).doubleValue(),
+                ((Long) jsonObject.get("resistance")).doubleValue()
         );
     }
 }

@@ -1,17 +1,17 @@
 package Entities;
 
-import Services.ColorInterface;
+import Utils.Helpers.ConsoleColorInterface;
 import Utils.Exceptions.InvalidTargetException;
 import Utils.Exceptions.NotEnoughManaException;
 import Utils.Exceptions.TargetIsDeadException;
 
-public class Attack implements ColorInterface {
+public class Attack implements ConsoleColorInterface {
     private final GameCharacter init;
     private final GameCharacter target;
     private final Ability usedAbility;
 
     public Attack(GameCharacter init, GameCharacter target, Ability usedAbility) throws InvalidTargetException, NotEnoughManaException {
-        if(!target.isAlive()){
+        if (!target.isAlive()) {
             throw new TargetIsDeadException(usedAbility, target);
         }
         this.init = init;
@@ -24,14 +24,14 @@ public class Attack implements ColorInterface {
     public double calculatePhysicalDmg() {
         double dmg = this.init.getStats().getStrength() * usedAbility.getPhysicalMulti()
                 - this.target.getStats().getArmor();
-        if(dmg < 0) dmg = 0;
+        if (dmg < 0) dmg = 0;
         return dmg;
     }
 
     public double calculateMagicalDmg() {
         double dmg = this.init.getStats().getIntelligence() *
                 usedAbility.getMagicalMulti() - this.target.getStats().getResistance();
-        if(dmg < 0) dmg = 0;
+        if (dmg < 0) dmg = 0;
         return dmg;
     }
 
@@ -52,15 +52,15 @@ public class Attack implements ColorInterface {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         GameCharacter init = getInit();
         GameCharacter target = getTarget();
         String result = init.toString() + " used "
                 + C_PURPLE + getUsedAbility().getName() + C_END +
                 " on " + target.toString() + " for "
                 + C_WHITE_BACKGROUND + C_BLACK + calculateTotalDmg() +
-                " dmg!" + C_END +"\n";
-        if(!target.isAlive()){
+                " dmg!" + C_END + "\n";
+        if (!target.isAlive()) {
             result += C_RED_BACKGROUND + C_YELLOW
                     + init.getName() + " has slain "
                     + target.getName() + "!" + C_END + "\n";

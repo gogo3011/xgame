@@ -13,7 +13,7 @@ public class PrintingService {
         this.printer = printer;
     }
 
-    public <T> void print(T message){
+    public <T> void print(T message) {
         printer.print(message);
     }
 }
