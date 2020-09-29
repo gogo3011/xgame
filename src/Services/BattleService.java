@@ -1,10 +1,11 @@
 package Services;
 
+import static Utils.Helpers.ConsoleColorInterface.*;
+
 import Entities.Ability;
 import Entities.Attack;
 import Entities.GameCharacter;
 import Entities.Player;
-import Utils.Exceptions.CantCastAbilityException;
 
 import java.util.ArrayList;
 
@@ -30,14 +31,16 @@ public class BattleService {
                 attack(target, abilityT, init);
             }
         }
+        postBattleReport(init, target);
     }
 
     public void attack(GameCharacter init, Ability ability, GameCharacter target) {
         try {
             Attack currAttack = new Attack(init, target, ability);
+            currAttack.execute();
             battleReport(currAttack);
             addUsedAttack(currAttack);
-        } catch (CantCastAbilityException ex) {
+        } catch (Exception ex) {
             printingService.print(ex.getMessage());
         }
     }
@@ -50,8 +53,17 @@ public class BattleService {
         printingService.print(attack);
     }
 
-    private void postBattleReport() {
+    private void postBattleReport(GameCharacter init, GameCharacter target) {
+        slainReport(init, target);
         usedAttacks.forEach(printingService::print);
+    }
+
+    private void slainReport(GameCharacter init, GameCharacter target) {
+        if (!target.isAlive()) {
+            printingService.print(C_RED_BACKGROUND + C_YELLOW
+                    + init.getName() + " has slain "
+                    + target.getName() + "!" + C_END + "\n");
+        }
     }
 
     private void addUsedAttack(Attack attack) {

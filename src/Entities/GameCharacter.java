@@ -20,6 +20,15 @@ public class GameCharacter extends GameEntity {
         this.abilities = abilities.clone();
     }
 
+    public GameCharacter(GameCharacter src) {
+        this.status = src.status;
+        this.name = src.name;
+        this.stats = src.stats;
+        this.currHealth = src.currHealth;
+        this.currMana = src.currMana;
+        this.abilities = src.abilities.clone();
+    }
+
     public CharacterStatus receiveAttack(Attack attack) {
         currHealth -= attack.calculateTotalDmg();
         if (currHealth <= 0) {

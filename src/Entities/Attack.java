@@ -1,24 +1,21 @@
 package Entities;
 
-import Utils.Helpers.ConsoleColorInterface;
-import Utils.Exceptions.InvalidTargetException;
+import static Utils.Helpers.ConsoleColorInterface.*;
+
+import Utils.Exceptions.AttackHasBeenExecutedException;
 import Utils.Exceptions.NotEnoughManaException;
 import Utils.Exceptions.TargetIsDeadException;
 
-public class Attack implements ConsoleColorInterface {
+public class Attack {
     private final GameCharacter init;
     private final GameCharacter target;
     private final Ability usedAbility;
+    private boolean used;
 
-    public Attack(GameCharacter init, GameCharacter target, Ability usedAbility) throws InvalidTargetException, NotEnoughManaException {
-        if (!target.isAlive()) {
-            throw new TargetIsDeadException(usedAbility, target);
-        }
+    public Attack(GameCharacter init, GameCharacter target, Ability usedAbility){
         this.init = init;
         this.target = target;
         this.usedAbility = usedAbility;
-        this.init.useAbility(this.usedAbility);
-        this.target.receiveAttack(this);
     }
 
     public double calculatePhysicalDmg() {
@@ -39,6 +36,18 @@ public class Attack implements ConsoleColorInterface {
         return calculateMagicalDmg() + calculatePhysicalDmg();
     }
 
+    public void execute() throws NotEnoughManaException, TargetIsDeadException, AttackHasBeenExecutedException{
+        if(used){
+            throw new AttackHasBeenExecutedException(this);
+        }
+        if(!target.isAlive()) {
+            throw new TargetIsDeadException(usedAbility, target);
+        }
+        this.init.useAbility(this.usedAbility);
+        this.target.receiveAttack(this);
+        used = true;
+    }
+
     public GameCharacter getInit() {
         return init;
     }
@@ -53,18 +62,10 @@ public class Attack implements ConsoleColorInterface {
 
     @Override
     public String toString() {
-        GameCharacter init = getInit();
-        GameCharacter target = getTarget();
-        String result = init.toString() + " used "
+        return init.toString() + " used "
                 + C_PURPLE + getUsedAbility().getName() + C_END +
                 " on " + target.toString() + " for "
                 + C_WHITE_BACKGROUND + C_BLACK + calculateTotalDmg() +
                 " dmg!" + C_END + "\n";
-        if (!target.isAlive()) {
-            result += C_RED_BACKGROUND + C_YELLOW
-                    + init.getName() + " has slain "
-                    + target.getName() + "!" + C_END + "\n";
-        }
-        return result;
     }
 }

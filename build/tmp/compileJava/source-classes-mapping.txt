@@ -1,42 +1,46 @@
-Entities/EnemyCharacter.java
- Entities.EnemyCharacter
-Entities/FriendlyCharacter.java
- Entities.FriendlyCharacter
+Entities/Stats.java
+ Entities.Stats
+Utils/Helpers/ConsoleColorInterface.java
+ Utils.Helpers.ConsoleColorInterface
 Entities/GameEntity.java
  Entities.GameEntity
 Services/PrintingService.java
  Services.PrintingService
-Entities/GameCharacter.java
- Entities.GameCharacter
-Entities/Attack.java
- Entities.Attack
-Utils/Helpers/ConsoleColorInterface.java
- Utils.Helpers.ConsoleColorInterface
-Entities/Stats.java
- Entities.Stats
 Utils/CharacterStatus.java
  Utils.CharacterStatus
-Entities/Ability.java
- Entities.Ability
 Utils/Exceptions/CantCastAbilityException.java
  Utils.Exceptions.CantCastAbilityException
-Utils/Exceptions/TargetIsDeadException.java
- Utils.Exceptions.TargetIsDeadException
-Services/CharacterFactory.java
- Services.CharacterFactory
-Utils/Exceptions/InvalidTargetException.java
- Utils.Exceptions.InvalidTargetException
 Utils/Exceptions/NotEnoughManaException.java
  Utils.Exceptions.NotEnoughManaException
 XGame.java
  XGame
+Entities/Ability.java
+ Entities.Ability
+Utils/Exceptions/InvalidTargetException.java
+ Utils.Exceptions.InvalidTargetException
+Utils/Exceptions/CantExecuteAttackException.java
+ Utils.Exceptions.CantExecuteAttackException
+Entities/FriendlyCharacter.java
+ Entities.FriendlyCharacter
+Services/MenuService.java
+ Services.MenuService
+Entities/GameCharacter.java
+ Entities.GameCharacter
+Entities/Attack.java
+ Entities.Attack
+Services/BattleService.java
+ Services.BattleService
+Services/CharacterFactory.java
+ Services.CharacterFactory
+Utils/Exceptions/AttackHasBeenExecutedException.java
+ Utils.Exceptions.AttackHasBeenExecutedException
 Entities/Player.java
  Entities.Player
 Entities/HumanPlayer.java
  Entities.HumanPlayer
 Entities/AIPlayer.java
  Entities.AIPlayer
-Services/MenuService.java
- Services.MenuService
-Services/BattleService.java
- Services.BattleService
+Utils/Exceptions/TargetIsDeadException.java
+ Utils.Exceptions.TargetIsDeadException
+Entities/EnemyCharacter.java
+ Entities.EnemyCharacter

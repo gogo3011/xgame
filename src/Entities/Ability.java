@@ -1,8 +1,8 @@
 package Entities;
 
-import Utils.Helpers.ConsoleColorInterface;
+import static Utils.Helpers.ConsoleColorInterface.*;
 
-public class Ability extends GameEntity implements ConsoleColorInterface {
+public class Ability extends GameEntity {
     private String name;
     private double physicalMulti;
     private double magicalMulti;
