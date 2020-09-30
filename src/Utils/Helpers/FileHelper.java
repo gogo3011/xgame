@@ -9,7 +9,7 @@ public class FileHelper {
     public FileHelper(){
     }
 
-    public ArrayList<String> getFilesInFolder(String path, String extension){
+    public static ArrayList<String> getFilesInFolder(String path, String extension){
         ArrayList<String> files = new ArrayList<>();
         File folder = new File(path);
         for (final File fileEntry : Objects.requireNonNull(folder.listFiles())) {
@@ -23,7 +23,7 @@ public class FileHelper {
         return files;
     }
 
-    public String getFileExtension(String fileName){
+    public static String getFileExtension(String fileName){
         String extension = "";
 
         int i = fileName.lastIndexOf('.');

@@ -7,8 +7,8 @@ import Utils.Exceptions.NotEnoughManaException;
 import Utils.Exceptions.TargetIsDeadException;
 
 public class Attack {
-    private final GameCharacter init;
-    private final GameCharacter target;
+    private GameCharacter init;
+    private GameCharacter target;
     private final Ability usedAbility;
     private boolean used;
 
@@ -48,6 +48,11 @@ public class Attack {
         used = true;
     }
 
+    public void saveCharactersStates(){
+        init = new GameCharacter(init);
+        target = new GameCharacter(target);
+    }
+
     public GameCharacter getInit() {
         return init;
     }
@@ -65,7 +70,7 @@ public class Attack {
         return init.toString() + " used "
                 + C_PURPLE + getUsedAbility().getName() + C_END +
                 " on " + target.toString() + " for "
-                + C_WHITE_BACKGROUND + C_BLACK + calculateTotalDmg() +
+                + C_RED_BACKGROUND + C_BLACK + calculateTotalDmg() +
                 " dmg!" + C_END + "\n";
     }
 }

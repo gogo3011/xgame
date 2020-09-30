@@ -11,8 +11,8 @@ public class GameSession {
     private Player player1;
     private Player player2;
 
-    public GameSession(Player opponent, GameCharacter[] characters){
-        this.player1 = new HumanPlayer();
+    public GameSession(Player host, Player opponent, GameCharacter[] characters){
+        this.player1 = host;
         this.player2 = opponent;
         this.characters = characters.clone();
     }

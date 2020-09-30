@@ -38,8 +38,9 @@ public class BattleService {
         try {
             Attack currAttack = new Attack(init, target, ability);
             currAttack.execute();
-            battleReport(currAttack);
+            attackReport(currAttack);
             addUsedAttack(currAttack);
+            currAttack.saveCharactersStates();
         } catch (Exception ex) {
             printingService.print(ex.getMessage());
         }
@@ -49,7 +50,7 @@ public class BattleService {
         printingService.print(init.toString(true) + target.toString(true));
     }
 
-    private void battleReport(Attack attack) {
+    private void attackReport(Attack attack) {
         printingService.print(attack);
     }
 

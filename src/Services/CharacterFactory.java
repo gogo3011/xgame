@@ -7,6 +7,7 @@ import Utils.Helpers.FileHelper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -33,13 +34,12 @@ public class CharacterFactory {
             ex.printStackTrace();
         }
         JSONParser parser = new JSONParser();
-        JSONObject jsonObject = null;
+        JSONObject jsonObject = new JSONObject();
         try {
             jsonObject = (JSONObject) parser.parse(json);
-        } catch (Exception ex) {
+        } catch (ParseException ex) {
             ex.printStackTrace();
         }
-        assert jsonObject != null;
         Stats stats = createStats(jsonObject);
         Ability[] abilities = createAbilityArray(jsonObject);
         return new GameCharacter((String) jsonObject.get("name"), stats, abilities);
@@ -72,7 +72,6 @@ public class CharacterFactory {
     }
 
     private ArrayList<String> scanForJsonFiles(String path) {
-        FileHelper fileHelper = new FileHelper();
-        return fileHelper.getFilesInFolder(path, "json");
+        return FileHelper.getFilesInFolder(path, "json");
     }
 }
