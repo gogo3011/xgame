@@ -19,7 +19,7 @@ public class CharacterFactory {
 
     public GameCharacter[] createCharFromResources(){
         ArrayList<GameCharacter> characters = new ArrayList<>();
-        scanForJsonFiles("src/main/resources/Characters")
+        FileHelper.scanForJsonFiles("src/main/resources/Characters")
                 .forEach((el) -> characters.add(createCharFromJSON(el)));
         GameCharacter[] arr = new GameCharacter[characters.size()];
         arr = characters.toArray(arr);
@@ -69,9 +69,5 @@ public class CharacterFactory {
                 ((Long) jsonObject.get("armor")).doubleValue(),
                 ((Long) jsonObject.get("resistance")).doubleValue()
         );
-    }
-
-    private ArrayList<String> scanForJsonFiles(String path) {
-        return FileHelper.getFilesInFolder(path, "json");
     }
 }

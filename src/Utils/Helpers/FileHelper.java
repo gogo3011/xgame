@@ -34,4 +34,8 @@ public class FileHelper {
         }
         return extension;
     }
+
+    public static ArrayList<String> scanForJsonFiles(String path) {
+        return FileHelper.getFilesInFolder(path, "json");
+    }
 }
