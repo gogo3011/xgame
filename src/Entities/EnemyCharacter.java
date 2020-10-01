@@ -8,7 +8,7 @@ public class EnemyCharacter extends GameCharacter {
     }
 
     public EnemyCharacter(GameCharacter character) {
-        super(character.getName(), character.getStats(), character.getAbilities());
+        super(character);
     }
 
     @Override
