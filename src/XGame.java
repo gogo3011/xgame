@@ -1,17 +1,15 @@
-import Entities.AIPlayer;
-import Entities.GameCharacter;
-import Entities.GameSession;
+import Entities.*;
 
-import Entities.HumanPlayer;
+import Services.AdventureFactory;
 import Services.CharacterFactory;
 
 public class XGame {
     public static void main(String[] args) {
-        CharacterFactory characterFactory = new CharacterFactory();
-        GameCharacter[] arr = characterFactory.createCharFromResources();
-        AIPlayer ai = new AIPlayer();
-        AIPlayer ai2 = new AIPlayer();
-        GameSession session = new GameSession(ai2, ai, arr);
+        GameCharacter[] characters = CharacterFactory.createCharFromResources();
+        HumanPlayer p1 = new HumanPlayer();
+        AIPlayer p2 = new AIPlayer();
+        AdventureBase[] bases = AdventureFactory.createAdventureBasesFromResources();
+        GameSession session = new GameSession(p1, p2, bases, characters);
         session.startSession();
     }
 }

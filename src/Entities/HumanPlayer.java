@@ -18,7 +18,12 @@ public class HumanPlayer extends Player {
         return this.menuService.chooseAbility(character);
     }
 
+    public AdventureBase chooseAdventure(GameSession session){
+        return this.menuService.chooseAdventure(session);
+    }
+
     public GameCharacter chooseCharacter(GameSession session) {
-        return this.menuService.chooseCharacter(session);
+        this.character = this.menuService.chooseCharacter(session);
+        return character;
     }
 }

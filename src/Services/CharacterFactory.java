@@ -14,38 +14,23 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class CharacterFactory {
-    public CharacterFactory() {
-    }
-
-    public GameCharacter[] createCharFromResources(){
+    public static GameCharacter[] createCharFromResources(){
         ArrayList<GameCharacter> characters = new ArrayList<>();
         FileHelper.scanForJsonFiles("src/main/resources/Characters")
                 .forEach((el) -> characters.add(createCharFromJSON(el)));
         GameCharacter[] arr = new GameCharacter[characters.size()];
-        arr = characters.toArray(arr);
+        characters.toArray(arr);
         return arr;
     }
 
-    public GameCharacter createCharFromJSON(String path) {
-        String json = "";
-        try {
-            json = Files.readString(Paths.get(path));
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        JSONParser parser = new JSONParser();
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject = (JSONObject) parser.parse(json);
-        } catch (ParseException ex) {
-            ex.printStackTrace();
-        }
+    public static GameCharacter createCharFromJSON(String path) {
+        JSONObject jsonObject = FileHelper.getJsonContents(path);
         Stats stats = createStats(jsonObject);
         Ability[] abilities = createAbilityArray(jsonObject);
         return new GameCharacter((String) jsonObject.get("name"), stats, abilities);
     }
 
-    private Ability[] createAbilityArray(JSONObject jsonObject) {
+    private static Ability[] createAbilityArray(JSONObject jsonObject) {
         JSONArray jsonArray = (JSONArray) jsonObject.get("abilities");
         Ability[] abilities = new Ability[jsonArray.size()];
         for (int i = 0; i < jsonArray.size(); i++) {
@@ -61,7 +46,7 @@ public class CharacterFactory {
         return abilities;
     }
 
-    private Stats createStats(JSONObject jsonObject) {
+    private static Stats createStats(JSONObject jsonObject) {
         return new Stats(((Long) jsonObject.get("maxHealth")).doubleValue(),
                 ((Long) jsonObject.get("maxMana")).doubleValue(),
                 ((Long) jsonObject.get("strength")).doubleValue(),

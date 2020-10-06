@@ -8,14 +8,25 @@ public class AIPlayer extends Player {
     }
 
     public Ability chooseAbility(GameCharacter character) {
-        int max = character.getAbilities().length;
-        int rand = ThreadLocalRandom.current().nextInt(0, max);
-        return character.getAbility(rand);
+        return character.getAbility(
+                chooseRandInt(character.getAbilities().length)
+        );
     }
 
     public GameCharacter chooseCharacter(GameSession session) {
-        int max = session.getCharacters().length;
-        int rand = ThreadLocalRandom.current().nextInt(0, max);
-        return session.getCharacter(rand);
+        this.character = session.getCharacter(
+                chooseRandInt(session.getCharacters().length)
+        );
+        return this.character;
+    }
+
+    public AdventureBase chooseAdventure(GameSession session) {
+        return session.getAdventure(
+                chooseRandInt(session.getAdventures().length)
+        );
+    }
+
+    private int chooseRandInt(int max){
+        return ThreadLocalRandom.current().nextInt(0, max);
     }
 }

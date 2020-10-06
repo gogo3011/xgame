@@ -1,6 +1,12 @@
 package Utils.Helpers;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -37,5 +43,22 @@ public class FileHelper {
 
     public static ArrayList<String> scanForJsonFiles(String path) {
         return FileHelper.getFilesInFolder(path, "json");
+    }
+
+    public static JSONObject getJsonContents(String path) {
+        String json = "";
+        try {
+            json = Files.readString(Paths.get(path));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        JSONParser parser = new JSONParser();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject = (JSONObject) parser.parse(json);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+        return jsonObject;
     }
 }

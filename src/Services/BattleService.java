@@ -12,23 +12,23 @@ import java.util.ArrayList;
 public class BattleService {
     private final static ArrayList<Attack> usedAttacks = new ArrayList<>();
     private final PrintingService printingService;
-    private final Player initPlayer;
-    private final Player targetPlayer;
+    private final Player host;
+    private final Player opponent;
 
-    public BattleService(PrintingService printingService, Player initPlayer, Player targetPlayer) {
+    public BattleService(PrintingService printingService, Player host, Player opponent) {
         this.printingService = printingService;
-        this.initPlayer = initPlayer;
-        this.targetPlayer = targetPlayer;
+        this.host = host;
+        this.opponent = opponent;
     }
 
     public void initiateBattle(GameCharacter init, GameCharacter target) {
         preBattleReport(init, target);
         while (target.isAlive() && init.isAlive()) {
-            Ability abilityI = this.initPlayer.chooseAbility(init);
-            attack(init, abilityI, target);
+            Ability abilityH = this.host.chooseAbility(init);
+            attack(init, abilityH, target);
             if (target.isAlive()) {
-                Ability abilityT = this.targetPlayer.chooseAbility(target);
-                attack(target, abilityT, init);
+                Ability abilityO = this.opponent.chooseAbility(target);
+                attack(target, abilityO, init);
             }
         }
         postBattleReport(init, target);
@@ -44,6 +44,11 @@ public class BattleService {
         } catch (Exception ex) {
             printingService.print(ex.getMessage());
         }
+    }
+
+    public void heal() {
+        host.getCharacter().heal();
+        opponent.getCharacter().heal();
     }
 
     private void preBattleReport(GameCharacter init, GameCharacter target) {

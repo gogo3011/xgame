@@ -1,0 +1,17 @@
+{
+  "name": "Example",
+  "author": "Georgi Dimitrov",
+  "steps": [
+    {
+    "type": "exposition",
+    "text": "This is an example adventure, in which {host} travels around and fights a {opponent}"
+    },
+    {
+      "type": "dialog",
+      "text" : "{opponent}: EYOOO {host}! Fight me bruh! \n{host}: Sure, {opponent}!"
+    },
+    {
+      "type": "battle",
+      "text": "3, 2, 1! FIGHT!"
+    }]
+}

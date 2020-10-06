@@ -1,6 +1,7 @@
 package Services;
 
 import Entities.Ability;
+import Entities.AdventureBase;
 import Entities.GameCharacter;
 import Entities.GameSession;
 
@@ -50,6 +51,21 @@ public class MenuService {
         GameCharacter[] characters = session.getCharacters();
         for (int i = 0; i < characters.length; i++) {
             printingService.print(i + 1 + ". " + characters[i].toString(true) + '\n');
+        }
+    }
+
+    public AdventureBase chooseAdventure(GameSession session) {
+        listAdventures(session);
+        this.printingService.print("Choose an adventure:\n");
+        return session.getAdventure(
+                askForInt(session.getAdventures().length) - 1
+        );
+    }
+
+    private void listAdventures(GameSession session) {
+        AdventureBase[] adventures = session.getAdventures();
+        for (int i = 0; i < adventures.length; i++) {
+            printingService.print(i + 1 + ". " + adventures[i].toString() + '\n');
         }
     }
 }

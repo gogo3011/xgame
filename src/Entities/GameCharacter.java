@@ -69,6 +69,14 @@ public class GameCharacter extends GameEntity {
         return getStatus() == CharacterStatus.ALIVE;
     }
 
+    private void setCurrHealth(double value){
+        if(isAlive()){
+            if(value > stats.getMaxHealth())
+                value = stats.getMaxHealth();
+            currHealth = value;
+        }
+    }
+
     public void useAbility(Ability ability) throws NotEnoughManaException {
         double manaCost = ability.getManaCost();
         if (currMana < manaCost) {
@@ -77,7 +85,15 @@ public class GameCharacter extends GameEntity {
         currMana -= manaCost;
     }
 
-    private String getResources(){
+    public void heal() {
+        setCurrHealth(stats.getMaxHealth());
+    }
+
+    public void heal(double healAmount) {
+        setCurrHealth(healAmount);
+    }
+
+    public String getResources(){
         return "[" + getCurrHealth() + "]" + "(" + getCurrMana() + ")";
     }
 
